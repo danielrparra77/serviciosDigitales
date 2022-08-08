@@ -1,0 +1,56 @@
+<div fxLayout="row">
+  <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+    <mat-card>
+      <div class="p-r-30 p-l-20" fxLayout="row" fxLayoutAlign="space-between center" >
+        <h2>Servicios Digitales</h2>
+        <mat-card-header>
+          <mat-form-field appearance="fill" class="selector">
+            <mat-label>Plataforma digital</mat-label>
+            <mat-select [ngModel]="plataformaSeleccionada">
+              <mat-option *ngFor="let plat of plats" [value]="plat.value">
+                {{plat.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button mat-button (click)="BuscarPlat()" class="grey">Buscar</button>
+          <!--<button mat-mini-fab title="Agregar Banca" *ngIf="crearBanca" (click)="openDialogBanca('Crear', null)" style="background-color: rgba(0,0,0,0.54)" ><mat-icon>add</mat-icon></button>-->
+        </mat-card-header>
+      </div>
+      <mat-card-content>
+            <!--<input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar">-->
+        <div class="responsive-table">
+          <mat-table [dataSource]="dataSource" matSort>
+            <!-- evento Column -->
+            <ng-container matColumnDef="evento">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Evento </mat-header-cell>
+              <mat-cell *matCellDef="let row"> {{row.evento}} </mat-cell>
+            </ng-container>
+
+            <!-- fecha_evento Column -->
+            <ng-container matColumnDef="fecha_evento">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </mat-header-cell>
+              <mat-cell *matCellDef="let row"> {{row.fecha_evento}} </mat-cell>
+            </ng-container>
+
+            <!-- cantidad Column -->
+            <ng-container matColumnDef="cantidad">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad </mat-header-cell>
+              <mat-cell *matCellDef="let row"> {{row.cantidad}} </mat-cell>
+            </ng-container>
+
+            <!-- costo Column -->
+            <ng-container matColumnDef="valor">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Costo </mat-header-cell>
+              <mat-cell *matCellDef="let row"> {{row.valor}} </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+
+          <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
